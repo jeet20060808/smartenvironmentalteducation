@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoVerse!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="javascript" href="script.js">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <section id="welcome-screen" class="screen active">
+            <div class="globe-container">
+                <div class="globe">Eco</div>
+            </div>
+            <div class="content-overlay">
+                <h1>EcoQuest</h1>
+                <p>Your Adventure to Save the Planet Begins Now.</p>
+                <button class="primary-button" onclick="navigateTo('role-screen')">Enter</button>
+            </div>
+        </section>
+
+        <section id="role-screen" class="screen">
+            <div class="content-wrapper" style="margin-top:0; padding: 24px;">
+                <h2>Are you a...</h2>
+                <p>Select your role to get started.</p>
+                
+                <div class="role-card" onclick="navigateTo('signup-screen-1')">
+                    <span class="emoji">🧑‍🎓</span>
+                    <div>
+                        <h3>Student</h3>
+                        <span>Start challenges, earn points, and compete!</span>
+                    </div>
+                </div>
+                
+                <div class="role-card" onclick="navigateTo('teacher-signup-screen')">
+                    <span class="emoji">👩‍🏫</span>
+                    <div>
+                        <h3>Teacher</h3>
+                        <span>Monitor progress and manage tasks.</span>
+                    </div>
+                </div>
+
+                <div class="dev-link">
+                    <button onclick="navigateTo('ar-screen')">Dev: Jump to AR Scanner</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="signup-screen-1" class="screen">
+            <header class="app-header">Student Registration (1/2)</header>
+            <div class="content-wrapper">
+                <h2>School Details</h2>
+                <div class="form-field"><input type="text" placeholder="Full Name"></div>
+                <div class="form-field"><input type="email" placeholder="School Gmail (work only)"></div>
+                <div class="form-field"><input type="text" placeholder="School Name"></div>
+                <div class="form-field">
+                    <select><option>Select Grade</option><option>Grade 5</option></select>
+                </div>
+                <div class="form-field"><input type="text" placeholder="Division (e.g., A, B)"></div>
+                <div class="form-field"><input type="text" placeholder="Roll No."></div>
+                <div class="form-field"><input type="number" placeholder="Age"></div>
+                <button class="primary-button" style="width: 100%;" onclick="navigateTo('signup-screen-2')">Next</button>
+            </div>
+        </section>
+        
+        <section id="signup-screen-2" class="screen">
+            <header class="app-header">Student Registration (2/2)</header>
+            <div class="content-wrapper">
+                <h2>A Little More About You</h2>
+                <div class="form-field"><input type="text" placeholder="Hobbies (e.g., drawing, hiking)"></div>
+                <div class="form-field"><input type="number" placeholder="Height (in cm)"></div>
+                <div class="form-field"><input type="number" placeholder="Weight (in kg)"></div>
+                <div class="form-field"><input type="number" placeholder="Last Year's Result (%)"></div>
+                <button class="primary-button" style="width: 100%;" onclick="navigateTo('interest-screen')">Next</button>
+            </div>
+        </section>
+
+        <section id="teacher-signup-screen" class="screen">
+            <header class="app-header">Teacher Registration</header>
+            <div class="content-wrapper">
+                <h2>Professional Details</h2>
+                <div class="form-field"><input type="text" placeholder="Degree (e.g., B.Sc, M.Ed)"></div>
+                <div class="form-field"><input type="text" placeholder="Qualification (e.g., B.Ed, D.T.Ed)"></div>
+                <div class="form-field"><input type="text" placeholder="Post (e.g., Science Teacher, Principal)"></div>
+                <button class="primary-button" style="width: 100%;" onclick="alert('Teacher profile submitted!')">Submit</button>
+            </div>
+        </section>
+        
+        <section id="interest-screen" class="screen">
+            <header class="app-header">Choose Your Interests</header>
+            <div class="content-wrapper" style="display: flex; flex-direction: column;">
+                <p style="text-align: center; margin-bottom: 24px;">Select at least 3 to start your first quiz.</p>
+                <div class="grid-container">
+                    <div class="interest-chip" onclick="toggleInterest(this)">Recycling</div>
+                    <div class="interest-chip" onclick="toggleInterest(this)">Tree Planting</div>
+                    <div class="interest-chip" onclick="toggleInterest(this)">Water Saving</div>
+                </div>
+                <button id="start-quiz-btn" class="primary-button" style="width: 100%; margin-top: 24px;" disabled onclick="navigateTo('quiz-screen')">Start Quiz</button>
+            </div>
+        </section>
+
+        <section id="quiz-screen" class="screen">
+            <div id="quiz-loader" class="loader"></div>
+            <div id="quiz-container" style="display:none;">
+                <p id="quiz-question"></p>
+                <div id="quiz-options"></div>
+            </div>
+        </section>
+
+        <section id="task-screen" class="screen">
+            <div class="task-card">
+                <div class="emoji">🌱</div>
+                <h2>New Task Unlocked!</h2>
+                <p>Your next mission is to plant a sapling in your neighborhood or a pot at home. Let's make our world greener!</p>
+                <button class="primary-button" onclick="navigateTo('proof-upload-screen')">I've Completed It!</button>
+            </div>
+        </section>
+        
+        <section id="proof-upload-screen" class="screen">
+             <div class="upload-box">
+                <h2>Upload Your Proof</h2>
+                <p>Take a photo of the sapling you planted.</p>
+                <label for="file-upload" class="upload-label">
+                    <span>📷</span>
+                    Click to Upload
+                </label>
+                <input id="file-upload" type="file" accept="image/*" onchange="handleFileUpload(event)">
+                <div id="image-preview"></div>
+                <button id="submit-proof-btn" class="primary-button" style="width: 100%; margin-top: 20px;" onclick="navigateTo('points-screen')" disabled>Submit Proof</button>
+            </div>
+        </section>
+
+        <section id="points-screen" class="screen">
+            <h2>Task Complete!</h2>
+            <div class="points-display">+50</div>
+            <p>Excellent work, Eco Warrior!</p>
+            <button class="primary-button" style="background: white; color: var(--emerald-600); margin-top: 30px;" onclick="navigateTo('welcome-screen')">Finish</button>
+        </section>
+
+    </div>
+
+    <script>
+        // JavaScript will be here
+    </script>
+
+</body>
+</html>
