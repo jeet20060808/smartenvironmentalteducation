@@ -3,3 +3,5 @@ this is basic frontend for the website for gamified environmental education . th
 
 as the topic was given by the sih(smart india hackathon)
 
+
+Which was made using html css and js 
